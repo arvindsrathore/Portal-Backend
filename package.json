@@ -1,0 +1,22 @@
+{
+  "name": "portal",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "firebase": "^10.12.2",
+    "mongoose": "^8.4.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.2"
+  }
+}
