@@ -3,4 +3,4 @@ import express from 'express';
 import * as postController from './../controllers/postController.js';
 export const router = express.Router();
 
-router.post('/post',postController.post);
+router.post('/',postController.post);

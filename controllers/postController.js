@@ -2,6 +2,8 @@ import { Post } from './../models/postModel.js';
 import { appFirebase,auth } from "../config/firebase.js";
 
 export const post = async(req,res) => {
+    try {
+        
     const currentUser = auth.currentUser;
     console.log(currentUser);
     const newpost = await Post.create({
@@ -16,4 +18,11 @@ export const post = async(req,res) => {
         status : "success",
         message : "posted successfully"
     })
+    } catch (error) {
+      
+    res.status(401).json({
+        status : "failure",
+        message : "unsuccessful"
+    })  
+    }
 }

@@ -5,20 +5,23 @@ import { appFirebase,auth } from "../config/firebase.js";
 export const details = async (req,res) => {
     const user = auth.currentUser;
 
-    console.log("User ID:", user.uid);
-    console.log("Email:", user.email);
-    console.log("Display Name:", user.displayName);
-    console.log("Photo URL:", user.photoURL);
-    console.log("Email Verified:", user.emailVerified);
-    console.log("Phone Number:", user.phoneNumber);
-    console.log("Provider Data:", user.providerData);
+    try {
+        if(user){
+            res.status(200).json({
+                status: "success",
+                message: {
+                    "Email ": user.email
+                }
+                });
+        }
+        res.status(200).json({
+            status:"failure"
+        })
+        
+    } catch (error) {
+        console.log(error);
+    }
 
-    res.status(200).json({
-      status: "success",
-      message: {
-        "Email ": user.email
-      }
-    });
 };
 
 export const register = async (req, res) => {
@@ -38,8 +41,8 @@ export const register = async (req, res) => {
       });
     } catch (error) {
       console.error(error);
-      res.status(201).json({
-          status: "failed",
+      res.status(404).json({
+          status: "failure",
           message: error
         });
     }
