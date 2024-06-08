@@ -1,6 +1,6 @@
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { appFirebase,auth } from "../config/firebase.js";
-
+import { doc, setDoc } from "firebase/firestore";
 
 export const details = async (req,res) => {
     const user = auth.currentUser;
@@ -27,13 +27,19 @@ export const details = async (req,res) => {
 export const register = async (req, res) => {
     console.log("here comes");
     try {
-      const { email, password } = req.body;
+      const { email, password, fullName, age } = req.body;
       console.log(email);
   
       // Create a new user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user; 
       console.log(user);
+      // Store additional details in Firestore
+    //   await setDoc(doc(db, "users", user.uid), {
+    //     email: user.email,
+    //     fullName: fullName,
+    //     age: age
+    //   });
   
       res.status(200).json({
           status: "success",

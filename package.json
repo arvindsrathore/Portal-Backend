@@ -16,6 +16,8 @@
     "express": "^4.19.2",
     "express-mongo-sanitize": "^2.2.0",
     "firebase": "^10.12.2",
+    "firebase-admin": "^12.1.1",
+    "firestore": "^1.1.6",
     "mongoose": "^8.4.1",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.2"

@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import { AppError } from "./utils/appError.js";
+import { globalErrorHandler } from "./controllers/errorController.js"
 import cors from 'cors';
 
 dotenv.config({ path: "./config.env" });
@@ -28,3 +29,5 @@ app.all('*',(req,res) => {
         message:"No url exits"
     })
 })
+
+app.use(globalErrorHandler);
