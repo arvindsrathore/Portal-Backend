@@ -41,6 +41,16 @@ export const getdetails = async(req,res) => {
     })
 };
 
+export const getpost = async(req,res) => {
+    const reviewId = req.params.reviewId
+    const currPost = await Post.find({"_id" : reviewId});
+    
+    res.status(200).json({
+        status : "success",
+        message : currPost[0]
+    })
+};
+
 export const getInternships = async(req,res) => {
     const allInternships = await Post.find({type: "Internship"});
     res.status(200).json({

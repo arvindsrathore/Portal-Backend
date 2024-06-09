@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const postSchema = new mongoose.Schema({
-    auther: {
+    author: {
         type: String
     },
     company: {
@@ -18,6 +18,12 @@ const postSchema = new mongoose.Schema({
         type: String
     },
     duration: {
+        type: String
+    },
+    location: {
+        type: String
+    },
+    salary: {
         type: String
     }
 });
