@@ -1,8 +1,9 @@
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { appFirebase,auth } from "../config/firebase.js";
 import { doc, setDoc } from "firebase/firestore";
+import { catchAsync } from "./../utils/catchAsync.js";
 
-export const details = async (req,res) => {
+export const details = catchAsync(async (req,res) => {
     const user = auth.currentUser;
 
     try {
@@ -22,9 +23,9 @@ export const details = async (req,res) => {
         console.log(error);
     }
 
-};
+});
 
-export const register = async (req, res) => {
+export const register = catchAsync(async (req, res) => {
     console.log("here comes");
     try {
       const { email, password, fullName, age } = req.body;
@@ -34,12 +35,6 @@ export const register = async (req, res) => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user; 
       console.log(user);
-      // Store additional details in Firestore
-    //   await setDoc(doc(db, "users", user.uid), {
-    //     email: user.email,
-    //     fullName: fullName,
-    //     age: age
-    //   });
   
       res.status(200).json({
           status: "success",
@@ -52,9 +47,9 @@ export const register = async (req, res) => {
           message: error
         });
     }
-};
+});
 
-export const login = async(req, res) => {
+export const login = catchAsync(async(req, res) => {
     try{
         const {email, password} = req.body;
         const userCredential = await signInWithEmailAndPassword(auth,email, password)
@@ -72,9 +67,9 @@ export const login = async(req, res) => {
             message: errorMessage
         });
     };
-};
+});
 
-export const logout = async(req , res) => {
+export const logout = catchAsync(async(req , res) => {
     try {
         await signOut(auth);
         
@@ -90,4 +85,4 @@ export const logout = async(req , res) => {
             message: errorMessage
         });
     }
-};
+});

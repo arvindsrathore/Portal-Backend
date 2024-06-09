@@ -1,7 +1,8 @@
 import { Post } from './../models/postModel.js';
 import { appFirebase,auth } from "../config/firebase.js";
+import { catchAsync } from "./../utils/catchAsync.js";
 
-export const post = async(req,res) => {
+export const post = catchAsync(async(req,res) => {
     try {
         
     const currentUser = auth.currentUser;
@@ -26,9 +27,9 @@ export const post = async(req,res) => {
         message : "unsuccessful"
     })  
     }
-}
+});
 
-export const insertPosts = async (req,res) => {
+export const insertPosts = catchAsync(async (req,res) => {
     try {
         const posts = req.body;
         const createdPosts = await Promise.all(posts.map(async (post) => {
@@ -56,4 +57,4 @@ export const insertPosts = async (req,res) => {
             message : "unsuccessful"
         })
     }
-};
+});
