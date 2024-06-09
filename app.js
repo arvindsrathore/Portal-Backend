@@ -9,7 +9,10 @@ dotenv.config({ path: "./config.env" });
 
 export const app = express();
 
-app.use(cors());
+let corsOptions = {
+    origin : ['http://localhost:3000'],
+}
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 
