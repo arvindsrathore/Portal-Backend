@@ -3,7 +3,7 @@ import { appFirebase,auth } from "../config/firebase.js";
 import { doc, setDoc } from "firebase/firestore";
 import { catchAsync } from "./../utils/catchAsync.js";
 
-export const details = catchAsync(async (req,res) => {
+export const details = catchAsync(async (req,res,next) => {
     const user = auth.currentUser;
 
     try {
@@ -21,6 +21,7 @@ export const details = catchAsync(async (req,res) => {
         
     } catch (error) {
         console.log(error);
+        next(error);
     }
 
 });

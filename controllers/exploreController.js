@@ -2,35 +2,47 @@ import { appFirebase,auth } from "../config/firebase.js";
 import { Post } from "../models/postModel.js";
 import { catchAsync } from "./../utils/catchAsync.js";
 
-export const getCompanies = catchAsync(async(req,res) => {
-    const CompanyData = await Post.distinct('company');
-    const pipeline = [
-        {
-            $group: {
-                _id: '$company',
-                reviewCount: { $sum: 1 }
-            }
-        },
-        {
-            $project: {
-                _id: 0,
-                company: '$_id',
-                reviewCount: 1
-            }
-        },
-        {
-            $sort: {
-                company: 1 // 1 for ascending order, -1 for descending order
-            }
-        }
-    ]; 
-    const results = await Post.aggregate(pipeline).exec();
+export const getCompanies = catchAsync(async (req, res, next) => {
+    try {
+        const CompanyData = await Post.distinct('company');
+        console.log('CompanyData:', CompanyData);
 
-    res.status(200).json({
-        status : "success",
-        message : results
-    })
+        // Aggregation pipeline
+        const pipeline = [
+            {
+                $group: {
+                    _id: '$company',
+                    reviewCount: { $sum: 1 }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    company: '$_id',
+                    reviewCount: 1
+                }
+            },
+            {
+                $sort: {
+                    company: 1 // 1 for ascending order, -1 for descending order
+                }
+            }
+        ];
+
+        // Execute the aggregation pipeline
+        const results = await Post.aggregate(pipeline).exec();
+        console.log('Aggregation Results:', results);
+
+        res.status(200).json({
+            status: "success",
+            message: results
+        });
+    } catch (err) {
+        console.error('Error fetching companies:', err);
+        next(err);
+    }
 });
+
 
 export const getdetails = catchAsync(async(req,res) => {
     const company = req.params.company
