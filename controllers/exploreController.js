@@ -8,34 +8,34 @@ export const getCompanies = catchAsync(async (req, res, next) => {
         console.log('CompanyData:', CompanyData);
 
         // Aggregation pipeline
-        const pipeline = [
-            {
-                $group: {
-                    _id: '$company',
-                    reviewCount: { $sum: 1 }
-                }
-            },
-            {
-                $project: {
-                    _id: 0,
-                    company: '$_id',
-                    reviewCount: 1
-                }
-            },
-            {
-                $sort: {
-                    company: 1 // 1 for ascending order, -1 for descending order
-                }
-            }
-        ];
+        // const pipeline = [
+        //     {
+        //         $group: {
+        //             _id: '$company',
+        //             reviewCount: { $sum: 1 }
+        //         }
+        //     },
+        //     {
+        //         $project: {
+        //             _id: 0,
+        //             company: '$_id',
+        //             reviewCount: 1
+        //         }
+        //     },
+        //     {
+        //         $sort: {
+        //             company: 1 // 1 for ascending order, -1 for descending order
+        //         }
+        //     }
+        // ];
 
         // Execute the aggregation pipeline
-        const results = await Post.aggregate(pipeline).exec();
-        console.log('Aggregation Results:', results);
+        // const results = await Post.aggregate(pipeline).exec();
+        // console.log('Aggregation Results:', results);
 
         res.status(200).json({
             status: "success",
-            message: results
+            message: CompanyData
         });
     } catch (err) {
         console.error('Error fetching companies:', err);
