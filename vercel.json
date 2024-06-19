@@ -10,7 +10,9 @@
         { "source": "/(.*)", "destination": "/server.js" }
     ],
     "functions": {
+      "*": {
       "maxDuration": 10
+    }
   },
     "headers": [
         {
