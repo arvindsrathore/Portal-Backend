@@ -8,14 +8,14 @@ export const details = catchAsync(async (req,res,next) => {
 
     try {
         if(user){
-            res.status(200).json({
+            return res.status(200).json({
                 status: "success",
                 message: {
                     "Email ": user.email
                 }
                 });
         }
-        res.status(200).json({
+        return res.status(200).json({
             status:"failure"
         })
         
