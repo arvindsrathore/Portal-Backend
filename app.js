@@ -12,7 +12,8 @@ export const app = express();
 let corsOptions = {
     origin : ['http://localhost:3000'],
 }
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
