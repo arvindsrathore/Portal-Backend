@@ -20,12 +20,15 @@ app.use(express.json());
 import {router as userRouter} from './routes/userRoutes.js';
 import {router as postRouter} from './routes/postRoutes.js';
 import {router as exploreRouter} from './routes/exploreRoutes.js';
+import {router as genAIrouter} from './routes/genAIroutes.js';
 
 app.use("/users",userRouter);
 
 app.use('/post',postRouter)
 
 app.use('/explore',exploreRouter)
+
+app.use('/genAI',genAIrouter);
 
 app.all('*',(req,res) => {
     res.status(202).json({
