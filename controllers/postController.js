@@ -21,7 +21,7 @@ export const post = catchAsync(async(req,res) => {
         message : "posted successfully"
     })
     } catch (error) {
-      console.log(error);
+      
     res.status(401).json({
         status : "failure",
         message : "unsuccessful"
