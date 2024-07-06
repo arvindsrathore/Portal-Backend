@@ -22,6 +22,12 @@ import {router as postRouter} from './routes/postRoutes.js';
 import {router as exploreRouter} from './routes/exploreRoutes.js';
 import {router as genAIrouter} from './routes/genAIroutes.js';
 
+//Catching
+import expressApiCache  from 'express-api-cache';
+const cache = expressApiCache.cache;
+
+app.use(cache('1 minute')); 
+
 app.use("/users",userRouter);
 
 app.use('/post',postRouter)
